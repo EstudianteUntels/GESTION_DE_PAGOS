@@ -2,11 +2,14 @@
 ob_start();
 $action = $_GET['action'];
 include 'admin_class.php';
+require_once __DIR__.'/app/controllers/AuthController.php';
 $crud = new Action();
 if($action == 'login'){
-	$login = $crud->login();
-	if($login)
-		echo $login;
+	// $login = $crud->login();
+	$controller = new AuthController();
+	echo $controller->login();
+	// if($login)
+		// echo $login;
 }
 if($action == 'login2'){
 	$login = $crud->login2();
@@ -14,9 +17,11 @@ if($action == 'login2'){
 		echo $login;
 }
 if($action == 'logout'){
-	$logout = $crud->logout();
-	if($logout)
-		echo $logout;
+	$controller = new AuthController();
+	echo $controller->logout();
+	// $logout = $crud->logout();
+	// if($logout)
+	// 	echo $logout;
 }
 if($action == 'logout2'){
 	$logout = $crud->logout2();

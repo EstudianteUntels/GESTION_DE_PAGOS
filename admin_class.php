@@ -3,12 +3,13 @@ session_start();
 ini_set('display_errors', 1);
 Class Action {
 	private $db;
-
+	private $con;
+	
 	public function __construct() {
+		include 'db_connect.php';
 		ob_start();
-   	include 'db_connect.php';
-    
     $this->db = $conn;
+		$this->con =  ConnectionDB::getInstanceDB()->getConnection();
 	}
 	function __destruct() {
 	    $this->db->close();
@@ -18,15 +19,23 @@ Class Action {
 	function login(){
 		extract($_POST);		
 		$qry = $this->db->query("SELECT * FROM users where username = '".$username."' and password = '".md5($password)."' ");
-		if($qry->num_rows > 0){
-			foreach ($qry->fetch_array() as $key => $value) {
+		$user = $this->con->query("SELECT * FROM users where username = '".$username."' and password = '".md5($password)."' ")->fetch();
+
+		if($user){
+			foreach ($user as $key => $value) {
 				if($key != 'passwors' && !is_numeric($key))
 					$_SESSION['login_'.$key] = $value;
 			}
-				return 1;
-		}else{
-			return 3;
+			return 1;
 		}
+		return 3;
+
+		// if($qry->num_rows > 0){
+		// 	foreach ($qry->fetch_array() as $key => $value) {
+		// 		return 1;
+		// }else{
+		// 	return 3;
+		// }
 	}
 	function login2(){
 		

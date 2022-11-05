@@ -1,7 +1,5 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'gestion-pagos',33065) or die("Could not connect to mysql" . mysqli_error($con));
-
-class ConnectionDB
+class MysqlConnection
 {
     protected static $instances = [];
     protected static $db_usuario = 'root';
@@ -28,7 +26,7 @@ class ConnectionDB
     {}
     protected function __clone()
     {}
-    public static function getInstanceDB(): ConnectionDB
+    public static function getInstanceDB(): MysqlConnection
     {
         $cls = static::class;
         if (!isset(self::$instances[$cls])) {

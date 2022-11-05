@@ -102,6 +102,7 @@ ob_end_flush();
 
 			},
 			success: function(resp) {
+				console.log(resp)
 				if (resp == 1) {
 					location.href = 'index.php?page=payments_report';
 				} else {
