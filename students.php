@@ -1,4 +1,6 @@
-<?php include('db_connect.php'); ?>
+<?php 
+// include('db_connect.php'); 
+?>
 <style>
 	input[type=checkbox] {
 		/* Double-sized Checkboxes */
@@ -16,6 +18,7 @@
 	}
 </style>
 <?php 
+
 if ($_SESSION['login_type'] == 1) { ?>
 <div class="container-fluid">
 
@@ -50,9 +53,10 @@ if ($_SESSION['login_type'] == 1) { ?>
 							</thead>
 							<tbody>
 								<?php
+								require_once __DIR__."/app/controllers/StudentController.php";
+								$studentController = new StudentController;
 								$i = 1;
-								$student = $conn->query("SELECT * FROM student order by name asc ");
-								while ($row = $student->fetch_assoc()) :
+								foreach ($studentController->list() as $row) :
 								?>
 									<tr>
 										<td class="text-center"><?php echo $i++ ?></td>
@@ -72,7 +76,7 @@ if ($_SESSION['login_type'] == 1) { ?>
 											<button class="btn btn-danger delete_student" type="button" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash-alt"></i></button>
 										</td>
 									</tr>
-								<?php endwhile; ?>
+								<?php endforeach; ?>
 							</tbody>
 
 						</table>

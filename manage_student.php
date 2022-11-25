@@ -1,10 +1,16 @@
 <?php
-include 'db_connect.php';
+// include 'db_connect.php';
+
+require_once __DIR__."/app/controllers/StudentController.php";
+$sc = new StudentController();
 if (isset($_GET['id'])) {
-    $qry = $conn->query("SELECT * FROM student where id= " . $_GET['id']);
-    foreach ($qry->fetch_array() as $k => $val) {
-        $$k = $val;
+    foreach ($sc->findById($_GET['id']) as $clave => $valor) {
+        $$clave =  $valor;
     }
+    // $qry = $conn->query("SELECT * FROM student where id= " . $_GET['id']);
+    // foreach ($qry->fetch_array() as $k => $val) {
+    //     $$k = $val;
+    // }
 }
 ?>
 <div class="container-fluid">

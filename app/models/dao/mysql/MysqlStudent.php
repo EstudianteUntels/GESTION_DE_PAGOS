@@ -39,7 +39,7 @@ class MysqStudent implements DAO
   {
     try {
       $query = "SELECT * FROM student";
-      return $this->connection->query($query)->fetchAll();
+      return $this->conn->query($query)->fetchAll();
     } catch (Exception $e) {
       exit("ERROR: " . $e->getMessage());
     }
@@ -47,6 +47,8 @@ class MysqStudent implements DAO
   public function showById($key)
   {
     try {
+      $query = "SELECT * FROM student WHERE id = '$key'";
+      return $this->conn->query($query)->fetchObject();
     } catch (Exception $e) {
       exit("ERROR: " . $e->getMessage());
     }
