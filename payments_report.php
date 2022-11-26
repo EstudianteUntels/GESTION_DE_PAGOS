@@ -1,7 +1,7 @@
 <?php
 
 include 'db_connect.php';
-session_start();
+// session_start();
 $month = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
 $username = $_SESSION['login_username'] ;
 $name = $_SESSION['login_name']

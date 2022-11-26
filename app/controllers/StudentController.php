@@ -15,4 +15,17 @@ class StudentController extends Controller{
     $student = $instance->showById($key);
     return $student;
   }
+  public function save(){
+    extract($_POST);
+    $instance = new MysqStudent();
+    $response = $instance->insert([
+      'id_no'=>$id_no,
+      'name'=>$name,
+      'contact'=>$contact,
+      'address'=>$address,
+      'email'=>$email,
+      'id'=> empty($id) ? NULL : $id 
+    ]);
+    return $response;
+  }
 }

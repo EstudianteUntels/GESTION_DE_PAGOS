@@ -58,6 +58,7 @@ if (isset($_GET['id'])) {
             method: 'POST',
             type: 'POST',
             success: function(resp) {
+                console.log(resp);
                 if (resp == 1) {
                     alert_toast("Datos guardados exitósamente", 'success')
                     setTimeout(function() {

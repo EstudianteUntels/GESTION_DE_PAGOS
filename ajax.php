@@ -3,6 +3,7 @@ ob_start();
 $action = $_GET['action'];
 include 'admin_class.php';
 require_once __DIR__.'/app/controllers/AuthController.php';
+require_once __DIR__.'/app/controllers/StudentController.php';
 $crud = new Action();
 if($action == 'login'){
 	// $login = $crud->login();
@@ -64,9 +65,12 @@ if($action == "delete_course"){
 		echo $delete;
 }
 if($action == "save_student"){
-	$save = $crud->save_student();
-	if($save)
-		echo $save;
+	$sc = new StudentController();
+	
+	$response = $sc->save();
+	// $save = $crud->save_student();
+	echo json_encode($response);
+	// if($save)
 }
 if($action == "delete_student"){
 	$delete = $crud->delete_student();

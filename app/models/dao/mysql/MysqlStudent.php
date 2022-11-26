@@ -22,7 +22,18 @@ class MysqStudent implements DAO
   }
   public function insert($object)
   {
+    extract($object);
     try {
+      $res = $this->conn->query("SELECT * FROM student where id_no ='$id_no' ".(!empty($id) ? " and id != {$id} " : ''));
+      if($res->rowCount() > 0){
+        return 2;
+        exit;
+      }
+      $query = is_null($object['id']) ? "INSERT INTO student set id_no='$id_no', name='$name', contact='$contact', address='$address', email='$email'" :
+      "UPDATE student set id_no='$id_no', name='$name', contact='$contact', address='$address', email='$email' where id = $id";
+      $this->conn->query($query);
+      return 1;
+      // return $object;
     } catch (Exception $e) {
       exit("ERROR: " . $e->getMessage() . "\n");
       return false;
