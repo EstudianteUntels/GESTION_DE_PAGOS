@@ -4,7 +4,7 @@ $action = $_GET['action'];
 include 'admin_class.php';
 // require_once __DIR__.'/app/controllers/AuthController.php';
 // require_once __DIR__.'/app/controllers/StudentController.php';
-require_once __DIR__."/app/models/ControllerFactory.php";
+require_once __DIR__."/app/controllers/ControllerFactory.php";
 $crud = new Action();
 if($action == 'login'){
 	// $login = $crud->login();

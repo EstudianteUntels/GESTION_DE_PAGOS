@@ -1,8 +1,8 @@
 <?php
 
 require_once __DIR__ . "/../core/Controller.php";
-require_once __DIR__ . "/../controllers/AuthController.php";
-require_once __DIR__ . "/../controllers/StudentController.php";
+require_once __DIR__ . "/AuthController.php";
+require_once __DIR__ . "/StudentController.php";
 
 class ControllerFactory
 {
