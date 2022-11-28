@@ -7,4 +7,8 @@ class Student{
   public $address;
   public $email;
   public $date_created;
+  public function __construct()
+  {
+    
+  }
 }

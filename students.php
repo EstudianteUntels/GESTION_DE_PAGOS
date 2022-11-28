@@ -56,24 +56,24 @@ if ($_SESSION['login_type'] == 1) { ?>
 								require_once __DIR__."/app/controllers/StudentController.php";
 								$studentController = new StudentController;
 								$i = 1;
-								foreach ($studentController->list() as $row) :
+								foreach ($studentController->list() as $student) :
 								?>
 									<tr>
 										<td class="text-center"><?php echo $i++ ?></td>
 										<td>
-											<?php echo $row['id_no'] ?>
+											<?php echo $student->id_no ?>
 										</td>
 										<td>
-											<?php echo ucwords($row['name']) ?>
+											<?php echo ucwords($student->name) ?>
 										</td>
 										<td class="">
-											<p>Correo: <?php echo $row['email'] ?></p>
-											<p># Móvil: <?php echo $row['contact'] ?></p>
-											<p>Dirección: <?php echo $row['address'] ?></p>
+											<p>Correo: <?php echo $student->email ?></p>
+											<p># Móvil: <?php echo $student->contact ?></p>
+											<p>Dirección: <?php echo $student->address ?></p>
 										</td>
 										<td class="text-center">
-											<button class="btn btn-primary edit_student" type="button" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i></button>
-											<button class="btn btn-danger delete_student" type="button" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash-alt"></i></button>
+											<button class="btn btn-primary edit_student" type="button" data-id="<?php echo $student->id ?>"><i class="fa fa-edit"></i></button>
+											<button class="btn btn-danger delete_student" type="button" data-id="<?php echo $student->id ?>"><i class="fa fa-trash-alt"></i></button>
 										</td>
 									</tr>
 								<?php endforeach; ?>

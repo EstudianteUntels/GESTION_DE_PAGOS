@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../interfaces/DAO.php";
+require_once __DIR__ . "/../../entities/Student.php";
 require_once "MysqlConnection.php";
 class MysqStudent implements DAO
 {
@@ -50,7 +51,19 @@ class MysqStudent implements DAO
   {
     try {
       $query = "SELECT * FROM student";
-      return $this->conn->query($query)->fetchAll();
+      $arr = [];
+      foreach ($this->conn->query($query)->fetchAll() as $row) {
+        $s = new Student();
+        $s->id = $row['id'];
+        $s->id_no = $row['id_no'];
+        $s->name = $row['name'];
+        $s->contact = $row['contact'];
+        $s->address = $row['address'];
+        $s->email = $row['email'];
+        $s->date_created = $row['date_created'];
+        array_push($arr,$s);
+      }
+    return $arr;
     } catch (Exception $e) {
       exit("ERROR: " . $e->getMessage());
     }
