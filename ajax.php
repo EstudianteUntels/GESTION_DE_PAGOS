@@ -2,12 +2,14 @@
 ob_start();
 $action = $_GET['action'];
 include 'admin_class.php';
-require_once __DIR__.'/app/controllers/AuthController.php';
-require_once __DIR__.'/app/controllers/StudentController.php';
+// require_once __DIR__.'/app/controllers/AuthController.php';
+// require_once __DIR__.'/app/controllers/StudentController.php';
+require_once __DIR__."/app/models/ControllerFactory.php";
 $crud = new Action();
 if($action == 'login'){
 	// $login = $crud->login();
-	$controller = new AuthController();
+	// $controller = new AuthController();
+	$controller = ControllerFactory::createController("auth");
 	echo $controller->login();
 	// if($login)
 		// echo $login;
@@ -18,7 +20,8 @@ if($action == 'login2'){
 		echo $login;
 }
 if($action == 'logout'){
-	$controller = new AuthController();
+	// $controller = new AuthController();
+	$controller = ControllerFactory::createController("auth");
 	echo $controller->logout();
 	// $logout = $crud->logout();
 	// if($logout)
@@ -65,7 +68,8 @@ if($action == "delete_course"){
 		echo $delete;
 }
 if($action == "save_student"){
-	$sc = new StudentController();
+	$sc = ControllerFactory::createController("student");
+	// $sc = new StudentController();
 	
 	$response = $sc->save();
 	// $save = $crud->save_student();
