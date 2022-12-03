@@ -1,8 +1,9 @@
 <?php
 
-require_once __DIR__.'/../core/Controller.php';
-require_once __DIR__."/../core/Http.php";
-require_once __DIR__."/../models/dao/mysql/MysqlUser.php";
+require_once DIR.'/../core/Controller.php';
+require_once DIR."/../core/Http.php";
+require_once DIR."/../models/dao/mysql/MysqlUser.php";
+require_once DIR."/../models/Encrytor.php";
 class AuthController extends Controller{
   public function index(){}
   public function create($data) {
@@ -14,12 +15,13 @@ class AuthController extends Controller{
       return;
     extract($_POST);
     $instance = new MysqlUser();
-    $user = $instance->selectParams([],['username='=>$username,'password='=>md5($password)]);
+    // $user = $instance->selectParams([],['username='=>$username,'password='=>md5($password)]);
+    $user = $instance->selectParams([],['username='=>$username,'password='=>Md5Encryptor::encrypt($password)]);
     if(empty($user)){
       return 3;
     }
     foreach ($user[0] as $key => $value) {
-      if(!is_numeric($key)) $_SESSION['login_'.$key] = $value;
+      if(!is_numeric($key)) $SESSION['login'.$key] = $value;
     }
     return 1;
   }
