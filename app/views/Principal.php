@@ -74,6 +74,7 @@ class Principal
           },
           success: function(resp) {
             console.log(resp)
+            // return
             if (resp == 1) {
               location.href = 'index.php?page=payments_report';
             } else {

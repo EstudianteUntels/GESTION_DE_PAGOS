@@ -10,7 +10,8 @@ if($action == 'login'){
 	// $login = $crud->login();
 	// $controller = new AuthController();
 	$controller = ControllerFactory::createController("auth");
-	echo $controller->login();
+	// echo $controller->login();
+	echo json_encode($controller->login());
 	// if($login)
 		// echo $login;
 }

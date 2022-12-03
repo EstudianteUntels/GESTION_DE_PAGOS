@@ -10,6 +10,7 @@
 
 
   <?php
+  var_dump($_SESSION['login_id']);
   if (!isset($_SESSION['login_id']))
     header('location:login.php');
   include('./header.php');

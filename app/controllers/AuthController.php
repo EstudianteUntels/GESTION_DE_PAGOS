@@ -17,11 +17,14 @@ class AuthController extends Controller{
     $instance = new MysqlUser();
     // $user = $instance->selectParams([],['username='=>$username,'password='=>md5($password)]);
     $user = $instance->selectParams([],['username='=>$username,'password='=>Md5Encryptor::encrypt($password)]);
+    // return $password;
     if(empty($user)){
       return 3;
     }
+    // return $user[0];
+    // session_start();
     foreach ($user[0] as $key => $value) {
-      if(!is_numeric($key)) $SESSION['login'.$key] = $value;
+      if(!is_numeric($key)) $_SESSION['login_'.$key] = $value;
     }
     return 1;
   }
@@ -29,6 +32,7 @@ class AuthController extends Controller{
   public function logout(){
     if(!Http::isRequestMethod('GET'))
       return;
+    session_start();
     session_destroy();
     foreach ($_SESSION as $key => $value) {
       unset($_SESSION[$key]);
