@@ -1,9 +1,9 @@
 <?php
 
-require_once DIR.'/../core/Controller.php';
-require_once DIR."/../core/Http.php";
-require_once DIR."/../models/dao/mysql/MysqlUser.php";
-require_once DIR."/../models/Encrytor.php";
+require_once __DIR__.'/../core/Controller.php';
+require_once __DIR__."/../core/Http.php";
+require_once __DIR__."/../models/dao/mysql/MysqlUser.php";
+require_once __DIR__."/../models/Encrytor.php";
 class AuthController extends Controller{
   public function index(){}
   public function create($data) {
