@@ -3,10 +3,10 @@
 class PaymentFacade {
   public function payments(){
     include("./app/views/PaymentView.php");
-    include("./app/models/entities/Payment.php");
+    include("./app/controllers/PaymentController.php");
     $pv = new PaymentView();
-    $p = new Payment();
-    $pv->formPayments($p->list());
+    $pc = new PaymentController();
+    $pv->formPayments($pc->list());
   }
 }
 ?>
