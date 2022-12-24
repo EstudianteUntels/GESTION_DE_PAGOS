@@ -38,7 +38,7 @@ class MysqlConnection
     {
         self::$instances = [];
     }
-    public function getConnection()
+    public function getConnection():PDO
     {
         return $this->pdo;
     }

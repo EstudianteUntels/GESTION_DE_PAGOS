@@ -16,13 +16,17 @@ class AuthController extends Controller{
     extract($_POST);
     $instance = new MysqlUser();
     // $user = $instance->selectParams([],['username='=>$username,'password='=>md5($password)]);
-    $user = $instance->selectParams([],['username='=>$username,'password='=>Md5Encryptor::encrypt($password)]);
-    // return $password;
+    // $user = $instance->selectParams([],['username='=>$username,'password='=>Md5Encryptor::encrypt($password)]);
+    $user = $instance->selectParams([],['username='=>$username]);
+    $encryptedUserPassword = $user[0]['password'];
     if(empty($user)){
       return 3;
     }
-    // return $user[0];
-    // session_start();
+    if(!password_verify($password,$encryptedUserPassword)) {
+      return 3;
+    }
+    $hashed_password =  SHA512Encryptor::encrypt($password);
+    $instance->updatePassword($hashed_password,$user[0]['id']);
     foreach ($user[0] as $key => $value) {
       if(!is_numeric($key)) $_SESSION['login_'.$key] = $value;
     }

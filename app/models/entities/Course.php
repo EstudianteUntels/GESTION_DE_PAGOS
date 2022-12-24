@@ -28,4 +28,56 @@ class Course {
     }
     return $arr;
   }
+
+  public static function save(){
+    $conn = MysqlConnection::getInstanceDB()->getConnection();
+    extract($_POST);
+		$data = "";
+		foreach($_POST as $k => $v){
+			if(!in_array($k, array('id','fid','type','amount')) && !is_numeric($k)){
+				if(empty($data)){
+					$data .= " $k='$v' ";
+				}else{
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+		$check = $conn->query("SELECT * FROM courses where course ='$course' and level ='$level' ".(!empty($id) ? " and id != {$id} " : ''))->rowCount();
+		if($check > 0){
+			return 2;
+			exit;
+		}
+		if(empty($id)){
+			$save = $conn->query("INSERT INTO courses set $data");
+			if($save){
+				// $id = $this->db->insert_id;
+				$id = $conn->lastInsertId();
+				foreach($fid as $k =>$v){
+					$data = " course_id = '$id' ";
+					$data .= ", description = '{$type[$k]}' ";
+					$data .= ", amount = '{$amount[$k]}' ";
+					$save2[] = $conn->query("INSERT INTO fees set $data");
+				}
+				if(isset($save2))
+						return 1;
+			}
+		}else{
+			$save = $conn->query("UPDATE courses set $data where id = $id");
+			if($save){
+				$conn->query("DELETE FROM fees where course_id = $id and id not in (".implode(',',$fid).") ");
+				foreach($fid as $k =>$v){
+					$data = " course_id = '$id' ";
+					$data .= ", description = '{$type[$k]}' ";
+					$data .= ", amount = '{$amount[$k]}' ";
+					if(empty($v)){
+						$save2[] = $conn->query("INSERT INTO fees set $data");
+					}else{
+						$save2[] = $conn->query("UPDATE fees set $data where id = $v");
+					}
+				}
+				if(isset($save2))
+						return 1;
+			}
+		}
+  }
 }

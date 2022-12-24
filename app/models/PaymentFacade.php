@@ -1,12 +1,22 @@
 <?php
 
 class PaymentFacade {
+  private PaymentController $paymentController;
+  public function __construct()
+  {
+    include("./app/controllers/PaymentController.php");
+    $this->paymentController = new PaymentController(); 
+  }
+
   public function payments(){
     include("./app/views/PaymentView.php");
-    include("./app/controllers/PaymentController.php");
     $pv = new PaymentView();
-    $pc = new PaymentController();
-    $pv->formPayments($pc->list());
+    $pv->formPayments($this->paymentController->list());
+  }
+  public function report(){
+    include("./app/views/PaymentReportView.php");
+    $prv = new  PaymentReportView();
+    $prv->showReport();
   }
 }
 ?>

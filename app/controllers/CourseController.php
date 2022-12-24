@@ -12,6 +12,7 @@ class CourseController extends Controller{
     
   }
   public function save(){
-    
+    $c = Course::save();
+    return $c;
   }
 }

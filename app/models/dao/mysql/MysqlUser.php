@@ -49,6 +49,9 @@ class MysqlUser implements DAO
       exit("ERROR: " . $e->getMessage());
     }
   }
+  public function updatePassword($hashed_password,$id){
+    $this->conn->query("UPDATE users SET password='".$hashed_password."' WHERE id=$id");
+  }
   public function selectParams($options = [], $where = [])
   {
     $filters = '';

@@ -59,9 +59,11 @@ if($action == "save_settings"){
 		echo $save;
 }
 if($action == "save_course"){
-	$save = $crud->save_course();
-	if($save)
-		echo $save;
+	// $save = $crud->save_course();
+	// if($save)
+	// 	echo $save;
+	$controller = ControllerFactory::createController("course");
+	echo $controller->save();
 }
 if($action == "delete_course"){
 	$delete = $crud->delete_course();
