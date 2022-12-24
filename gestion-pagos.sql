@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2022 a las 08:32:44
+-- Servidor: 127.0.0.1:33065
+-- Tiempo de generación: 24-12-2022 a las 04:12:08
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -177,8 +177,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `type`) VALUES
-(1, 'configuroweb', 'hola@configuroweb.com', '4b67deeb9aba04a5b54632ad19934f26', 1),
-(2, 'Juan Estudiante', 'jusuario@cweb.com', '4b67deeb9aba04a5b54632ad19934f26', 2);
+(1, 'configuroweb', 'hola@configuroweb.com', '$2y$09$vWs/CtgjG0TjjO5w.Tqli.CHhpbIkIcdj3/rOrvZsDJt7u0jExPK2', 1),
+(2, 'Juan Estudiante', 'jusuario@cweb.com', '$2y$09$wgHoZEPtYCeoxLU57OKQi.Ki01Dz/2Eg5qp3wzfkCEuyPOeo1ki8.', 2);
 
 --
 -- Índices para tablas volcadas
@@ -234,13 +234,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `fees`
 --
 ALTER TABLE `fees`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `payments`
