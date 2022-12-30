@@ -41,11 +41,11 @@ class Principal
                 <form id="login-form">
                   <div class="form-group">
                     <label for="username" class="control-label">Correo</label>
-                    <input type="text" id="username" name="username" class="form-control" pattern="[A-Za-z0-9_-]" required>
+                    <input type="text" id="username" name="username" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                   </div>
                   <div class="form-group">
                     <label for="password" class="control-label">Contraseña</label>
-                    <input type="password" id="password" name="password" class="form-control" pattern="[A-Za-z0-9_-]" required>
+                    <input type="password" id="password" name="password" class="form-control" pattern="[A-Za-z0-9_-\.]" required>
                   </div>
                   <br>
                   <center><button class="btn btn-primary">Ingresar</button></center>
